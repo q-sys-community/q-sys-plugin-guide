@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- Initially generated manually using `nuget spec`-->
+<package >
+  <metadata>
+    <id>Plugin-Template</id>
+    <version>0.0.0.0-localdev</version>
+    <title>Q-Sys Plugin Template</title>
+    <authors>Sam Shelton</authors>
+    <owners>Solo Works London</owners>
+    <license type="expression">GPL-3.0-or-later</license>
+    <projectUrl>https://github.com/thatgitsam/Q-Sys-Plugin-Template</projectUrl>
+    <iconUrl>http://content/images/brand-logo-128px.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Q-Sys Designer Template</description>
+    <releaseNotes>AutoGenerateFromGitCommitMessages</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>Q-Sys Template</tags>
+    <summary>A template for Q-Sys Plugin development</summary>
+  </metadata>
+  <files>
+    <file src="content\**" target="content" />
+  </files>
+</package>

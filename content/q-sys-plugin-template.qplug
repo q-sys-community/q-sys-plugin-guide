@@ -1,0 +1,281 @@
+-- Plugin for Lightware Devices by Solo Works London
+-- Built in Lua
+-- For source, contact https://soloworks.co.uk
+
+PluginInfo = {
+    Name = "Q-Sys Community~Template (0.0.0-master)", -- The tilde here indicates folder structure in the Shematic Elements pane
+    Version = "0.0.0-master",
+    Id = "q-sys.community.template.0.0.0-master", -- show this is just a unique id. Show some commented out 'fun' unique ids
+    Description = "Template for development of Q-Sys Plugins, and automation testing.",
+    ShowDebug = true,
+    Author = "Solo Works London"
+}
+
+-- Once you've drawn your plugin in Designer, you can determine what colors you use a lot. Save yourself some time by putting them in a table, and then simply calling them later.
+local Colors = {
+    White = {255, 255, 255},
+    Black = {0, 0, 0},
+    Red = {255, 0, 0},
+    Green = {0, 255, 0}
+}
+
+-- We can let users determine some of the plugin properties by exposing them here
+-- While this function can be very useful, it is completely optional and not always needed.
+-- If no Properties are set here, only the position and fill properties of your plugin will show in the Properties pane
+function GetProperties()
+    props = {
+        {
+            Name = "MyStringProperty",
+            Type = "string",
+            Value = "Hello World"
+        },
+        {
+            Name = "MyIntegerProperty",
+            Type = "integer",
+            Min = 2,
+            Max = 10,
+            Value = 5
+        },
+        {
+            Name = "MyBooleanProperty",
+            Type = "boolean",
+            Value = false
+        }
+    }
+    return props
+end
+
+-- The below function is optional (like GetProperties() is), but it can allow further customization of what users can and can't do with your plugin.
+-- In this example, when Model 1 is selected in the properties pane, the ability to modify some of the properties will be hidden, only allowing customization with Model 2
+-- Another application of this is if you have different input/output types for different models, and want those properties to be dynamic in the Properties pane
+function RectifyProperties(props)
+    return props
+end
+
+-- The below function is where you will populate the controls for your plugin.
+-- If you've written some of the Runtime code already, simply use the control names you populated in Text Controller/Control Script, and use their Properties to inform the values here
+-- ControlType can be Button, Knob, Indicator or Text
+-- ButtonType ( ControlType == Button ) can be Momentary, Toggle or Trigger
+-- IndicatorType ( ControlType == Indicator ) can be Led, Meter, Text or Status
+-- ControlUnit ( ControlType == Knob ) can be Hz, Float, Integer, Pan, Percent, Position or Seconds
+function GetControls(props)
+    ctls = {
+        -- ControlType == Indicator
+        {
+            Name = "IndicatorLed",
+            ControlType = "Indicator",
+            IndicatorType = "Led",
+            PinStyle = "Output",
+            UserPin = true
+        },
+        {
+            Name = "IndicatorMeter",
+            ControlType = "Indicator",
+            IndicatorType = "Meter",
+            PinStyle = "Output",
+            UserPin = true
+        },
+        {
+            Name = "IndicatorText",
+            ControlType = "Indicator",
+            IndicatorType = "Text",
+            PinStyle = "Output",
+            UserPin = true
+        },
+        {
+            Name = "IndicatorStatus",
+            ControlType = "Indicator",
+            IndicatorType = "Status",
+            PinStyle = "Output",
+            UserPin = true
+        },
+        -- ControlType == Button
+        {
+            Name = "ButtonMomentary",
+            ControlType = "Button",
+            ButtonType = "Toggle",
+            PinStyle = "Input",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "ButtonToggle",
+            ControlType = "Button",
+            ButtonType = "Toggle",
+            PinStyle = "Input",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "ButtonTrigger",
+            ControlType = "Button",
+            ButtonType = "Trigger",
+            PinStyle = "Input",
+            Count = 1,
+            UserPin = true
+        },
+        -- ControlType == Knob
+        {
+            Name = "KnobHz",
+            ControlType = "Knob",
+            ControlUnit = "Hz",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "KnobFloat",
+            ControlType = "Knob",
+            ControlUnit = "Float",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "KnobInteger",
+            ControlType = "Knob",
+            ControlUnit = "Integer",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "KnobPan",
+            ControlType = "Knob",
+            ControlUnit = "Pan",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "KnobPercent",
+            ControlType = "Knob",
+            ControlUnit = "Percent",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "KnobPosition",
+            ControlType = "Knob",
+            ControlUnit = "Position",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        },
+        {
+            Name = "KnobSeconds",
+            ControlType = "Knob",
+            ControlUnit = "Seconds",
+            PinStyle = "Output",
+            Count = 1,
+            UserPin = true
+        }
+    }
+    return ctls
+end
+
+-- Variable holding Page Names for ease
+local pagenames = {"Display"}
+
+-- This function allows you to populate pages in your plugin.
+function GetPages(props)
+    pages = {}
+    table.insert(pages, {name = pagenames[1]})
+    return pages
+end
+
+-- This function allows you to layout pages in your plugin.
+function GetControlLayout(props)
+    -- layout holds representaiton of Controls
+    local layout = {}
+    -- graphics holds aesthetic & design items
+    local graphics = {}
+    -- ctl_str is a helper string to get around system not indexing single value as [1]
+    --local ctl_str = tostring(props["SomeValue"].Value == 1 and "" or " " .. PageIndex)
+    -- x,y allows an easy method of knowing where you are relative to the section being designed
+    local x, y = 0, 0
+
+    -- Graphics Section
+    table.insert(
+        graphics,
+        {
+            Type = "GroupBox", -- This is the overall groupbox that will give the plugin a more 'contained' look
+            Text = "Design Elements",
+            HTextAlign = "Left",
+            Fill = Colors.White,
+            CornerRadius = 8,
+            StrokeColor = Colors.Black,
+            StrokeWidth = 1,
+            Position = {x, y},
+            Size = {220, 140} -- The width of the main GroupBox is dependent on how many channels the user specified. More channels means a wider group box
+        }
+    )
+    table.insert(
+        graphics,
+        {
+            Type = "Text",
+            Text = "My Text Field",
+            Font = "Roboto",
+            FontSize = 12,
+            FontStyle = "Bold",
+            HTextAlign = "Left",
+            Color = Colors.Black,
+            Position = {x + 5, y + 20},
+            Size = {100, 20}
+        }
+    )
+    -- Buttons Section
+    y = y + 150
+    table.insert(
+        graphics,
+        {
+            Type = "GroupBox", -- This is the overall groupbox that will give the plugin a more 'contained' look
+            Text = "Button Elements",
+            HTextAlign = "Left",
+            Fill = Colors.White,
+            CornerRadius = 8,
+            StrokeColor = Colors.Black,
+            StrokeWidth = 1,
+            Position = {x, y},
+            Size = {220, 140} -- The width of the main GroupBox is dependent on how many channels the user specified. More channels means a wider group box
+        }
+    )
+    -- Indicator Section
+    y = y + 150
+    table.insert(
+        graphics,
+        {
+            Type = "GroupBox", -- This is the overall groupbox that will give the plugin a more 'contained' look
+            Text = "Indicator Elements",
+            HTextAlign = "Left",
+            Fill = Colors.White,
+            CornerRadius = 8,
+            StrokeColor = Colors.Black,
+            StrokeWidth = 1,
+            Position = {x, y},
+            Size = {220, 140} -- The width of the main GroupBox is dependent on how many channels the user specified. More channels means a wider group box
+        }
+    )
+    -- Knob Section
+    y = y + 150
+    table.insert(
+        graphics,
+        {
+            Type = "GroupBox", -- This is the overall groupbox that will give the plugin a more 'contained' look
+            Text = "Knob Elements",
+            HTextAlign = "Left",
+            Fill = Colors.White,
+            CornerRadius = 8,
+            StrokeColor = Colors.Black,
+            StrokeWidth = 1,
+            Position = {x, y},
+            Size = {220, 140} -- The width of the main GroupBox is dependent on how many channels the user specified. More channels means a wider group box
+        }
+    )
+
+    return layout, graphics
+end
+
+if Controls then
+end
