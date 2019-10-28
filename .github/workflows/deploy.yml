@@ -1,0 +1,41 @@
+name: Deploy Package
+
+on:
+  push:
+    branches:
+      -master
+    tags:
+      - '*'
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Pull Source Files
+      uses: actions/checkout@v1
+
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Update version in .qplug file
+      run: |
+        $TAG = $Env:GITHUB_REF.Replace("refs/tags/","")
+        # Will get exactly the first instance of a .qplug file
+        $QPLUG = (Get-ChildItem -Path "content" -Include *.qplug -Force -Recurse -File | Select-Object -First 1).Name
+        ((Get-Content -path content\$QPLUG -Raw) -replace '0.0.0.0-master',$TAG) | Set-Content content\$QPLUG
+        
+  
+    - name: Pack with nuget.exe
+      run: |
+        nuget pack -Version $Env:GITHUB_REF.Replace("refs/tags/","")
+
+    - name: Push with nuget.exe
+      env: # Or as an environment variable
+        NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
+      run: |
+        $NUPKG = (Get-ChildItem -Path "." -Include *.nupkg -Force -Recurse -File | Select-Object -First 1).Name
+        nuget push $NUPKG -Source "https://q-sys.soloworks.co.uk/q-sys-community-plugins/" -ApiKey $Env:NUGET_APIKEY
+
+        
