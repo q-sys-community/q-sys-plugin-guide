@@ -15,6 +15,8 @@ A resource for development of plugins for the Q-Sys platform.
   - [Development](#development)
     - [Programming Environment](#programming-environment)
     - [Deployment](#deployment)
+  - [NuSpec - MetaData](#nuspec---metadata)
+    - [Author](#author)
   - [GetControlLayout - Graphics Table](#getcontrollayout---graphics-table)
     - [Images](#images)
       - [Detail](#detail)
@@ -75,6 +77,13 @@ When saving .lua files, always automatically format the file, either by right-cl
 ### Deployment
 
 All plugins are open source, which means you are free to dig in and contribute. To submit changes, you can fork a branch and when done submit a pull request. Once accepted, a plugin will be tagged with a new version number (in the format x.x.x.x), and will be automatically packaged and pushed to the server from which it can be installed and used.
+
+## NuSpec - MetaData
+
+### Author
+
+- "QSC" will cause plugin to appear in "QSC Managed" tree
+- Anything else will appear in "User" tree
 
 ## GetControlLayout - Graphics Table
 
