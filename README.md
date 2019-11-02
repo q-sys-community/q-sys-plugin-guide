@@ -1,4 +1,4 @@
-# q-sys-plugin-development
+# QSC Q-Sys Plugin Development Guide
 
 Development Template & Guides for building and deploying QSC Q-Sys Community Plugins.
 
