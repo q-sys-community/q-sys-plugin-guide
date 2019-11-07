@@ -26,6 +26,8 @@ A resource for development of plugins for the Q-Sys platform.
   - [NuSpec File Structure](#nuspec-file-structure)
     - [MetaData](#metadata)
       - [Author](#author)
+    - [Description](#description)
+    - [Release Notes](#release-notes)
 
 
 ## Getting Started
@@ -151,3 +153,13 @@ Used to display dynamic text
 
 - "QSC" will cause plugin to appear in "QSC Managed" tree
 - Anything else will appear in "User" tree
+
+### Description
+
+The description field is populated by the `description.md` file in the root of the plugin repo.
+
+NuGet supports most simple markdown, and the deploy process will convert relative image links from markdown to the slightly different NuGet supported format so that you can create and preview the file in VS Code.
+
+### Release Notes
+
+To be included as part of the build as a WIP
