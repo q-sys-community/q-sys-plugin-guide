@@ -7,38 +7,47 @@ Development Template & Guides for building and deploying QSC Q-Sys Community Plu
 
 A resource for development of plugins for the Q-Sys platform.
 
-- [q-sys-plugin-development](#q-sys-plugin-development)
+- [QSC Q-Sys Plugin Development Guide](#qsc-q-sys-plugin-development-guide)
   - [Getting Started](#getting-started)
     - [Notes about using from source vs installing a version](#notes-about-using-from-source-vs-installing-a-version)
     - [Quickstart for Use](#quickstart-for-use)
-    - [QuickStart for development](#quickstart-for-development)
+    - [QuickStart for Development](#quickstart-for-development)
   - [Development](#development)
-    - [Programming Environment](#programming-environment)
+    - [Programming Environment (IDE)](#programming-environment-ide)
     - [Deployment](#deployment)
-  - [NuSpec - MetaData](#nuspec---metadata)
-    - [Author](#author)
-  - [GetControlLayout - Graphics Table](#getcontrollayout---graphics-table)
-    - [Images](#images)
-      - [Detail](#detail)
+  - [Plugin File (LUA as .qplug)](#plugin-file-lua-as-qplug)
+    - [GetControlLayout - Graphics Table](#getcontrollayout---graphics-table)
+      - [Images](#images)
+        - [Detail](#detail)
       - [Usage](#usage)
     - [Text Field](#text-field)
       - [Detail](#detail-1)
       - [Usage](#usage-1)
+  - [NuSpec File Structure](#nuspec-file-structure)
+    - [MetaData](#metadata)
+      - [Author](#author)
 
 
 ## Getting Started
 
 ### Notes about using from source vs installing a version
 
-Plugins are identified by a combination of the pluginID and version. You can install plugins and use them at any version number, but if you copy and use the source code version you may need to re-load Q-Sys Designer to see changes. You will also need to delete and re-drag the plugin after any significant changes.
+Plugins are identified by NuGet by the ID and version in the NuSpec file, and by Q-Sys Designer by the UID. You can have multiple versions of a plugin, but if two have the same UID you will only see one.
 
-For any live projects, install and use a module as this will not change. For development, use the source and be wary of unpredictable results.
+For any live projects, install and use a versioned plugin.
+
+For development, use the source and be wary of unpredictable results. You will also need to delete and re-drag the plugin after any significant changes to any non-control code to re-trigger compilation of correct hooks, otherwise results will be unpredictable.
 
 ### Quickstart for Use
 
-Open Q-Sys Designer with the `/dev` command line argument. Under Asset Manager there will now be a cog icon active at the top right, you can add the community archive here. The URL is: `https://q-sys.soloworks.co.uk/q-sys-community-plugins/`.
+- Open Q-Sys Designer with the `/dev` command line argument
+- Under Asset Manager there will now be a cog icon active at the top right
+- Add the community server `https://q-sys.soloworks.co.uk/q-sys-community-plugins/`
+- **Note:** Entries may double up on first time, refresh view with :arrows_counterclockwise: to clear
 
-### QuickStart for development
+### QuickStart for Development
+
+Some knowledge of Git based workflows is required, to submit changes and improvements please follow standard fork/branch workflow and submit a Pull Request when finished.
 
 Clone a plugin repository to somewhere (we use Documents/GitHub/repo-name)
 
@@ -52,11 +61,13 @@ User Defined plugins are defined and placed in the folowing folder. Copy the .qp
 %userprofile%\Documents\QSC\Q-Sys Designer\Plugins
 ```
 
-This will now appear under user plugins.
+This will now appear under user plugins as version 0.0.0.0-master. When finished with changes, copy back to the repo and commit.
+
+**Note:** Please only submit tested and working files, always ensure they have been linted with the correct extensions (see below) to ensure only code changes are submitted and not syntax and spacing. We are opinionated with code in order to debug logic, not spacing.
 
 ## Development
 
-### Programming Environment
+### Programming Environment (IDE)
 
 For consistency of coding structure, Visual Studio Code should be used for development with the following extensions:
 
@@ -78,18 +89,13 @@ When saving .lua files, always automatically format the file, either by right-cl
 
 All plugins are open source, which means you are free to dig in and contribute. To submit changes, you can fork a branch and when done submit a pull request. Once accepted, a plugin will be tagged with a new version number (in the format x.x.x.x), and will be automatically packaged and pushed to the server from which it can be installed and used.
 
-## NuSpec - MetaData
+## Plugin File (LUA as .qplug)
 
-### Author
+### GetControlLayout - Graphics Table
 
-- "QSC" will cause plugin to appear in "QSC Managed" tree
-- Anything else will appear in "User" tree
+#### Images
 
-## GetControlLayout - Graphics Table
-
-### Images
-
-#### Detail
+##### Detail
 
 Images can be included by encoding Svg, Png or Jpeg as a base64 string using a site such as:
 
@@ -137,3 +143,11 @@ Used to display dynamic text
     Size = {x, y}
 }
 ```
+## NuSpec File Structure
+
+### MetaData
+
+#### Author
+
+- "QSC" will cause plugin to appear in "QSC Managed" tree
+- Anything else will appear in "User" tree
