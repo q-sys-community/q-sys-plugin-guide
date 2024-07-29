@@ -3,7 +3,7 @@
 Development Template & Guides for building and deploying QSC Q-Sys Community Plugins.
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
-[![LinkedIn](https://img.shields.io/badge/Contact-LinkedIn-blue)](https://www.linkedin.com/company/soloworkslondon/)
+[![LinkedIn](https://img.shields.io/badge/Contact-LinkedIn-blue)](https://www.linkedin.com/company/carrier-labs/)
 
 A resource for development of plugins for the Q-Sys platform.
 
@@ -44,10 +44,7 @@ A resource for development of plugins for the Q-Sys platform.
 
 ### Quickstart for Use
 
-- Open Q-Sys Designer with the `/dev` command line argument
-- Under Asset Manager there will now be a cog icon active at the top right
-- Add the community server `https://q-sys.soloworks.co.uk/q-sys-community-plugins/`
-- **Note:** Entries may double up on first time, refresh view with :arrows_counterclockwise: to clear
+- Download and 
 
 ### QuickStart for Development
 

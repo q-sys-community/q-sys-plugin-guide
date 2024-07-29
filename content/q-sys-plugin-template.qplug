@@ -1,6 +1,6 @@
--- Plugin for Lightware Devices by Solo Works London
+-- Plugin for Generic Devices by Carrier Labs
 -- Built in Lua
--- For source, contact https://soloworks.co.uk
+-- For source, contact https://carrierlabs.net
 
 PluginInfo = {
     Name = "Q-Sys Community~Template (0.0.0-master)", -- The tilde here indicates folder structure in the Shematic Elements pane
