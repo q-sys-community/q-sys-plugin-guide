@@ -44,7 +44,7 @@ A resource for development of plugins for the Q-Sys platform.
 
 ### Quickstart for Use
 
-- Download and 
+- Download and Install plugin files to your local directory
 
 ### QuickStart for Development
 
